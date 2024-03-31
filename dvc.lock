@@ -1,0 +1,112 @@
+schema: '2.0'
+stages:
+  download:
+    cmd: python src/download.py
+    deps:
+    - path: src/download.py
+      hash: md5
+      md5: a297e268f17dd8f322bd10e324f52da6
+      size: 4499
+    params:
+      params.yaml:
+        download.base_url: https://www.ncei.noaa.gov/data/local-climatological-data/access/
+        download.destination: data/archive/
+        download.hourly_features:
+        - HourlyRelativeHumidity
+        - HourlyDryBulbTemperature
+        - HourlyDewPointTemperature
+        - HourlySeaLevelPressure
+        - HourlyStationPressure
+        download.link_parser: data/content.html
+        download.monthly_features:
+        - MonthlyAverageRH
+        - MonthlyMeanTemperature
+        - MonthlyDewpointTemperature
+        - MonthlySeaLevelPressure
+        - MonthlyStationPressure
+        download.n_locs: 25
+        download.seed: 20240326
+        download.year: 2023
+    outs:
+    - path: data/archive/
+      hash: md5
+      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
+      size: 22106427
+      nfiles: 3
+  preparation:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/archive/
+      hash: md5
+      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
+      size: 22106427
+      nfiles: 3
+    - path: src/prepare.py
+      hash: md5
+      md5: c3cc7e9d41e388f61b06fb5eb2b7b828
+      size: 2129
+    params:
+      params.yaml:
+        download.destination: data/archive/
+        download.hourly_features:
+        - HourlyRelativeHumidity
+        - HourlyDryBulbTemperature
+        - HourlyDewPointTemperature
+        - HourlySeaLevelPressure
+        - HourlyStationPressure
+        download.monthly_features:
+        - MonthlyAverageRH
+        - MonthlyMeanTemperature
+        - MonthlyDewpointTemperature
+        - MonthlySeaLevelPressure
+        - MonthlyStationPressure
+    outs:
+    - path: data/output/
+      hash: md5
+      md5: 852747998f7ae1052641102f067ceae4.dir
+      size: 805
+      nfiles: 3
+  processing:
+    cmd: python src/process.py
+    deps:
+    - path: data/archive/
+      hash: md5
+      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
+      size: 22106427
+      nfiles: 3
+    - path: data/output/
+      hash: md5
+      md5: b1698dcb4822daecfbccc587e0386b29.dir
+      size: 3006
+      nfiles: 6
+    - path: src/process.py
+      hash: md5
+      md5: 2838e1c7bd611dac158a587e96aea7b0
+      size: 2559
+    params:
+      params.yaml:
+        download.destination: data/archive/
+        download.hourly_features:
+        - HourlyRelativeHumidity
+        - HourlyDryBulbTemperature
+        - HourlyDewPointTemperature
+        - HourlySeaLevelPressure
+        - HourlyStationPressure
+        download.monthly_features:
+        - MonthlyAverageRH
+        - MonthlyMeanTemperature
+        - MonthlyDewpointTemperature
+        - MonthlySeaLevelPressure
+        - MonthlyStationPressure
+  evaluation:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/output/
+      hash: md5
+      md5: b1698dcb4822daecfbccc587e0386b29.dir
+      size: 3006
+      nfiles: 6
+    - path: src/evaluate.py
+      hash: md5
+      md5: c0ff14fd89042c6da889aaf848ef70df
+      size: 1872

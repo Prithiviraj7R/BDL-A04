@@ -1,0 +1,16 @@
+stages:
+  prepare:
+    cmd: python src/download.py
+    deps:
+    - src/download.py
+    params:
+    - download.base_url
+    - download.destination
+    - download.hourly_features
+    - download.link_parser
+    - download.monthly_features
+    - download.n_locs
+    - download.seed
+    - download.year
+    outs:
+    - data/archive
