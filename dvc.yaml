@@ -1,16 +1,43 @@
 stages:
-  prepare:
+  download:
     cmd: python src/download.py
     deps:
     - src/download.py
     params:
     - download.base_url
     - download.destination
-    - download.hourly_features
     - download.link_parser
-    - download.monthly_features
     - download.n_locs
     - download.seed
     - download.year
+    - download.hourly_features
+    - download.monthly_features
     outs:
-    - data/archive
+    - data/archive/
+  preparation:
+    cmd: python src/prepare.py
+    deps:
+    - src/prepare.py
+    - data/archive/
+    params:
+    - download.hourly_features
+    - download.monthly_features
+    - download.destination
+    outs:
+    - data/output/
+  processing:
+    cmd: python src/process.py
+    deps:
+    - src/process.py
+    - data/output/
+    - data/archive/
+    params:
+    - download.hourly_features
+    - download.monthly_features
+    - download.destination
+  evaluation:
+    cmd: python src/evaluate.py
+    deps:
+    - src/evaluate.py
+    - data/output/
+    
