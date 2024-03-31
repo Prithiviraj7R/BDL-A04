@@ -1,9 +1,19 @@
 download:
-  seed: 20240327
+  seed: 20240331
   year: 2023
   n_locs: 25
-  base_url: "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
-  destination: "data/archive/"
-  link_parser: "data/content.html"
-  hourly_features: [HourlyRelativeHumidity, HourlyDryBulbTemperature, HourlyDewPointTemperature, HourlySeaLevelPressure, HourlyStationPressure]
-  monthly_features: [MonthlyAverageRH, MonthlyMeanTemperature, MonthlyDewpointTemperature, MonthlySeaLevelPressure, MonthlyStationPressure]
+  base_url: https://www.ncei.noaa.gov/data/local-climatological-data/access/
+  destination: data/archive/
+  link_parser: data/content.html
+  hourly_features:
+  - HourlyRelativeHumidity
+  - HourlyDryBulbTemperature
+  - HourlyDewPointTemperature
+  - HourlySeaLevelPressure
+  - HourlyStationPressure
+  monthly_features:
+  - MonthlyAverageRH
+  - MonthlyMeanTemperature
+  - MonthlyDewpointTemperature
+  - MonthlySeaLevelPressure
+  - MonthlyStationPressure

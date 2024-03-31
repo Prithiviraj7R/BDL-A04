@@ -25,21 +25,21 @@ stages:
         - MonthlySeaLevelPressure
         - MonthlyStationPressure
         download.n_locs: 25
-        download.seed: 20240327
+        download.seed: 20240331
         download.year: 2023
     outs:
     - path: data/archive/
       hash: md5
-      md5: 5b0a285d57b6ad1d3f7d1e4c829569d9.dir
-      size: 23958784
+      md5: 4a3dcfbf59587f08d242212b3f4479f1.dir
+      size: 23318409
       nfiles: 3
   preparation:
     cmd: python src/prepare.py
     deps:
     - path: data/archive/
       hash: md5
-      md5: 5b0a285d57b6ad1d3f7d1e4c829569d9.dir
-      size: 23958784
+      md5: 4a3dcfbf59587f08d242212b3f4479f1.dir
+      size: 23318409
       nfiles: 3
     - path: src/prepare.py
       hash: md5
@@ -63,21 +63,21 @@ stages:
     outs:
     - path: data/output/
       hash: md5
-      md5: c9194a3796de13ce714e372ef668d29e.dir
-      size: 843
+      md5: c453dcfb8a5113e06276e4e6a26b9ea8.dir
+      size: 808
       nfiles: 3
   processing:
     cmd: python src/process.py
     deps:
     - path: data/archive/
       hash: md5
-      md5: 5b0a285d57b6ad1d3f7d1e4c829569d9.dir
-      size: 23958784
+      md5: 4a3dcfbf59587f08d242212b3f4479f1.dir
+      size: 23318409
       nfiles: 3
     - path: data/output/
       hash: md5
-      md5: dfac8a0197d5fbd61b18743bd6645634.dir
-      size: 3036
+      md5: fbef00aa10499b8114a4e7f16d65025c.dir
+      size: 3001
       nfiles: 6
     - path: src/process.py
       hash: md5
@@ -98,21 +98,3 @@ stages:
         - MonthlyDewpointTemperature
         - MonthlySeaLevelPressure
         - MonthlyStationPressure
-  evaluation:
-    cmd: python src/evaluate.py
-    deps:
-    - path: data/output/
-      hash: md5
-      md5: dfac8a0197d5fbd61b18743bd6645634.dir
-      size: 3036
-      nfiles: 6
-    - path: src/evaluate.py
-      hash: md5
-      md5: c0ff14fd89042c6da889aaf848ef70df
-      size: 1872
-    outs:
-    - path: eval/metrics.json
-      hash: md5
-      md5: 2bf12edb56b84c6a0d3fb6fe474ce2d5
-      size: 57
-      isexec: true
