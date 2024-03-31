@@ -1,0 +1,8 @@
+numpy 
+pandas
+dvc 
+dvclive
+requests
+bs4
+scikit-learn
+pyaml
