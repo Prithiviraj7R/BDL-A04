@@ -40,4 +40,5 @@ stages:
     deps:
     - src/evaluate.py
     - data/output/
-    
+    metrics:
+    - eval/metrics.json
