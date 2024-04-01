@@ -25,21 +25,21 @@ stages:
         - MonthlySeaLevelPressure
         - MonthlyStationPressure
         download.n_locs: 20
-        download.seed: 20240326
+        download.seed: 20240402
         download.year: 2023
     outs:
     - path: data/archive/
       hash: md5
-      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
-      size: 22106427
+      md5: 84f214fb66111e34ef0697acef306ea8.dir
+      size: 62941436
       nfiles: 3
   preparation:
     cmd: python src/prepare.py
     deps:
     - path: data/archive/
       hash: md5
-      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
-      size: 22106427
+      md5: 84f214fb66111e34ef0697acef306ea8.dir
+      size: 62941436
       nfiles: 3
     - path: src/prepare.py
       hash: md5
@@ -63,21 +63,21 @@ stages:
     outs:
     - path: data/output/
       hash: md5
-      md5: 852747998f7ae1052641102f067ceae4.dir
-      size: 805
+      md5: 81190d97cda0f48b769dab4d92e0301e.dir
+      size: 619
       nfiles: 3
   processing:
     cmd: python src/process.py
     deps:
     - path: data/archive/
       hash: md5
-      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
-      size: 22106427
+      md5: 84f214fb66111e34ef0697acef306ea8.dir
+      size: 62941436
       nfiles: 3
     - path: data/output/
       hash: md5
-      md5: 852747998f7ae1052641102f067ceae4.dir
-      size: 805
+      md5: 81190d97cda0f48b769dab4d92e0301e.dir
+      size: 619
       nfiles: 3
     - path: src/process.py
       hash: md5
@@ -101,21 +101,21 @@ stages:
     outs:
     - path: data/computed/
       hash: md5
-      md5: 47d916db109a578a0ac33fa674ce980b.dir
-      size: 2201
+      md5: 78a723beaa87a76cba8c7edc650a021c.dir
+      size: 1704
       nfiles: 3
   evaluation:
     cmd: python src/evaluate.py
     deps:
     - path: data/computed/
       hash: md5
-      md5: 47d916db109a578a0ac33fa674ce980b.dir
-      size: 2201
+      md5: 78a723beaa87a76cba8c7edc650a021c.dir
+      size: 1704
       nfiles: 3
     - path: data/output/
       hash: md5
-      md5: 852747998f7ae1052641102f067ceae4.dir
-      size: 805
+      md5: 81190d97cda0f48b769dab4d92e0301e.dir
+      size: 619
       nfiles: 3
     - path: src/evaluate.py
       hash: md5
@@ -124,6 +124,6 @@ stages:
     outs:
     - path: eval/metrics.json
       hash: md5
-      md5: 73842d6232c6a28418a8e144db7b133b
+      md5: dc5811b8a3d867a943bd13b7938edd73
       size: 57
       isexec: true

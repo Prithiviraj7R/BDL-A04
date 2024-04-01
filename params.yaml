@@ -1,5 +1,5 @@
 download:
-  seed: 20240326
+  seed: 20240402
   year: 2023
   n_locs: 20
   base_url: https://www.ncei.noaa.gov/data/local-climatological-data/access/
