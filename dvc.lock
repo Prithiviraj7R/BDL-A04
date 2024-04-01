@@ -25,21 +25,21 @@ stages:
         - MonthlySeaLevelPressure
         - MonthlyStationPressure
         download.n_locs: 25
-        download.seed: 20240331
+        download.seed: 20240401
         download.year: 2023
     outs:
     - path: data/archive/
       hash: md5
-      md5: 4a3dcfbf59587f08d242212b3f4479f1.dir
-      size: 23318409
+      md5: 3d42c24cdff6e39b461538dfc5d27fc1.dir
+      size: 23545816
       nfiles: 3
   preparation:
     cmd: python src/prepare.py
     deps:
     - path: data/archive/
       hash: md5
-      md5: 4a3dcfbf59587f08d242212b3f4479f1.dir
-      size: 23318409
+      md5: 3d42c24cdff6e39b461538dfc5d27fc1.dir
+      size: 23545816
       nfiles: 3
     - path: src/prepare.py
       hash: md5
@@ -63,8 +63,8 @@ stages:
     outs:
     - path: data/output/
       hash: md5
-      md5: c453dcfb8a5113e06276e4e6a26b9ea8.dir
-      size: 808
+      md5: fae84bf7246d24960030686402ff0529.dir
+      size: 815
       nfiles: 3
   processing:
     cmd: python src/process.py
