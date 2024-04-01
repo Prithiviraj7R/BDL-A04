@@ -5,8 +5,8 @@ stages:
     deps:
     - path: src/download.py
       hash: md5
-      md5: a297e268f17dd8f322bd10e324f52da6
-      size: 4499
+      md5: e94c82c4748c6adcee64f86dac3c48a9
+      size: 4495
     params:
       params.yaml:
         download.base_url: https://www.ncei.noaa.gov/data/local-climatological-data/access/
@@ -38,9 +38,9 @@ stages:
     deps:
     - path: data/archive/
       hash: md5
-      md5: cf4d3850a10c6b5b9dcdb1663e3a970a.dir
-      size: 7910264
-      nfiles: 1
+      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
+      size: 22106427
+      nfiles: 3
     - path: src/prepare.py
       hash: md5
       md5: c3cc7e9d41e388f61b06fb5eb2b7b828
@@ -63,26 +63,26 @@ stages:
     outs:
     - path: data/output/
       hash: md5
-      md5: 0f3d039414aa79dad846d31d311f9b9b.dir
-      size: 266
-      nfiles: 1
+      md5: 852747998f7ae1052641102f067ceae4.dir
+      size: 805
+      nfiles: 3
   processing:
     cmd: python src/process.py
     deps:
     - path: data/archive/
       hash: md5
-      md5: cf4d3850a10c6b5b9dcdb1663e3a970a.dir
-      size: 7910264
-      nfiles: 1
+      md5: e970e481fbcbb7bee348b16f8fbbbf63.dir
+      size: 22106427
+      nfiles: 3
     - path: data/output/
       hash: md5
-      md5: 8060d42cceda1775372aed89b00a7dce.dir
-      size: 1000
-      nfiles: 2
+      md5: 852747998f7ae1052641102f067ceae4.dir
+      size: 805
+      nfiles: 3
     - path: src/process.py
       hash: md5
-      md5: 2838e1c7bd611dac158a587e96aea7b0
-      size: 2559
+      md5: 0bd188710f7769b84a9837a25b57e9a0
+      size: 2873
     params:
       params.yaml:
         download.destination: data/archive/
@@ -98,21 +98,32 @@ stages:
         - MonthlyDewpointTemperature
         - MonthlySeaLevelPressure
         - MonthlyStationPressure
+    outs:
+    - path: data/computed/
+      hash: md5
+      md5: 47d916db109a578a0ac33fa674ce980b.dir
+      size: 2201
+      nfiles: 3
   evaluation:
     cmd: python src/evaluate.py
     deps:
+    - path: data/computed/
+      hash: md5
+      md5: 47d916db109a578a0ac33fa674ce980b.dir
+      size: 2201
+      nfiles: 3
     - path: data/output/
       hash: md5
-      md5: dfac8a0197d5fbd61b18743bd6645634.dir
-      size: 3036
-      nfiles: 6
+      md5: 852747998f7ae1052641102f067ceae4.dir
+      size: 805
+      nfiles: 3
     - path: src/evaluate.py
       hash: md5
-      md5: c0ff14fd89042c6da889aaf848ef70df
-      size: 1872
+      md5: 466605543d445bd177b3183382385781
+      size: 2001
     outs:
     - path: eval/metrics.json
       hash: md5
-      md5: 2bf12edb56b84c6a0d3fb6fe474ce2d5
+      md5: 73842d6232c6a28418a8e144db7b133b
       size: 57
       isexec: true

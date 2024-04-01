@@ -121,7 +121,6 @@ def main():
     monthly_features = params["monthly_features"]
     hourly_features = params["hourly_features"]
 
-
     os.makedirs(destination, exist_ok=True)
 
     # Fetch the links from the location
@@ -135,7 +134,6 @@ def main():
 
     selected_files = fetch_file_links(link_parse_file, n_locs, seed)
     valid_files = fetch_data(selected_files, destination, base_url, year, monthly_features, hourly_features)
-
 
 if __name__ == '__main__':
     main()

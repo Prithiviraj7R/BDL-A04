@@ -6,7 +6,12 @@ import os
 import yaml
 from datetime import datetime
 
-def compute_monthly_averages(input_folder, hourly_features, monthly_features, extraction_folder):
+def compute_monthly_averages(input_folder, hourly_features, monthly_features, extraction_folder, output_folder):
+    """
+    Function to compute the monthly averages for the features 
+    extracted in the preparation stage and store the computed
+    aggregates in the designated folder
+    """
     files = os.listdir(extraction_folder)
     files = [file for file in files if not file.startswith('computed')]
 
@@ -48,7 +53,7 @@ def compute_monthly_averages(input_folder, hourly_features, monthly_features, ex
                 
             computed_df[hourly_column] = sorted_averages
 
-        output_file_path = os.path.join(extraction_folder, f'computed_{file_name}')
+        output_file_path = os.path.join(output_folder, f'computed_{file_name}')
         computed_df.to_csv(output_file_path, index=False, mode='w')
 
 
@@ -59,12 +64,17 @@ def main():
     hourly_features = params['hourly_features']
     monthly_features = params['monthly_features']
     extraction_folder = 'data/output/'
+    output_folder = 'data/computed/'
+
+    os.makedirs(output_folder, exist_ok=True)
+    
 
     compute_monthly_averages(
         input_folder,
         hourly_features,
         monthly_features,
         extraction_folder,
+        output_folder,
     )
 
 if __name__ == '__main__':
