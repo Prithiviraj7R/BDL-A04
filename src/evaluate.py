@@ -8,6 +8,19 @@ import os
 import yaml
 
 def evaluate(input_folder, computed_folder, live, save_path):
+    """
+    Function to evaluate the performance of computed features against ground truth data.
+
+    Args:
+        input_folder (str): Path to the folder containing ground truth data files.
+        computed_folder (str): Path to the folder containing computed data files.
+        live (dvclive.Live): Instance of dvclive.Live for live logging.
+        save_path (str): Path to save evaluation results.
+
+    Returns:
+        None
+    """
+
     files = os.listdir(input_folder)
     computed_files = os.listdir(computed_folder)
 
@@ -49,10 +62,12 @@ def evaluate(input_folder, computed_folder, live, save_path):
     
 
 def main():
+    # parameters for evaluation
     input_folder = 'data/output/'
     computed_folder = 'data/computed/'
     EVAL_PATH = 'eval'
 
+    # Live staging for experimentation 
     with Live(EVAL_PATH, dvcyaml=False) as live:
         evaluate(input_folder, computed_folder, live, save_path=EVAL_PATH)
 

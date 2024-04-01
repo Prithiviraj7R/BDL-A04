@@ -7,11 +7,26 @@ import os
 from datetime import datetime
 
 def extract_monthly_features(input_folder, output_folder, hourly_features, monthly_features):
-    
+    """
+    Function to extract monthly features from input data files and 
+    store the extracted features in a specified output folder.
+
+    Args:
+        input_folder (str): Path to the folder containing input data files.
+        output_folder (str): Path to the folder where extracted features will be stored.
+        hourly_features (list): List of features to compute hourly averages for.
+        monthly_features (list): List of corresponding monthly features.
+
+    Returns:
+        None
+    """
+
     for file_name in os.listdir(input_folder):
         file_path = os.path.join(input_folder, file_name)
         df = pd.read_csv(file_path, low_memory=False)
         monthly_df = pd.DataFrame()
+
+        # check for non-empty monthly features and corresponding hourly features
 
         for monthly_feature, hourly_feature in zip(monthly_features, hourly_features):
             if monthly_feature in df.columns:
@@ -31,6 +46,7 @@ def extract_monthly_features(input_folder, output_folder, hourly_features, month
 
                             monthly_df[monthly_feature] = monthly_data            
                         
+        # store the extracted file containing the monthly averages
         output_file_path = os.path.join(output_folder, file_name)
         monthly_df.to_csv(output_file_path, index=False)
 

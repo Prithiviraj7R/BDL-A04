@@ -96,6 +96,8 @@ def fetch_data(files, destination, base_url, year, monthly_features, hourly_feat
             print(f'Downloaded [{i+1}/{len(files)}]')
             i += 1
 
+        # checking the file for non-empty monthly features
+
         if check_validity(file_path, monthly_features, hourly_features):
             valid_files.append(file_path)
             count += 1
@@ -110,6 +112,7 @@ def fetch_data(files, destination, base_url, year, monthly_features, hourly_feat
 
 def main():
     # Load the required parameters
+    
     params = yaml.safe_load(open("params.yaml"))["download"]
 
     base_url = params["base_url"]

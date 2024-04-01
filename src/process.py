@@ -10,7 +10,17 @@ def compute_monthly_averages(input_folder, hourly_features, monthly_features, ex
     """
     Function to compute the monthly averages for the features 
     extracted in the preparation stage and store the computed
-    aggregates in the designated folder
+    aggregates in the designated folder.
+
+    Args:
+        input_folder (str): Path to the folder containing input data files.
+        hourly_features (list): List of features to compute hourly averages for.
+        monthly_features (list): List of corresponding monthly features.
+        extraction_folder (str): Path to the folder where extracted data is stored.
+        output_folder (str): Path to the folder to store computed averages.
+
+    Returns:
+        None    
     """
     files = os.listdir(extraction_folder)
     files = [file for file in files if not file.startswith('computed')]
@@ -19,6 +29,8 @@ def compute_monthly_averages(input_folder, hourly_features, monthly_features, ex
         file_path = os.path.join(extraction_folder, file_name)
         monthly_features_df = pd.read_csv(file_path, low_memory=False)
         monthly_columns = monthly_features_df.columns
+
+        # get the hourly features to be aggregated month wise
 
         hourly_columns = [
             hourly_feature 
@@ -30,6 +42,8 @@ def compute_monthly_averages(input_folder, hourly_features, monthly_features, ex
         computed_df = pd.DataFrame()
         file_path = os.path.join(input_folder, file_name)
         df = pd.read_csv(file_path, low_memory=False)
+
+        # computation of monthly averages
 
         for hourly_column in hourly_columns:
             computed_monthly_averages = {i: 0.0 for i in range(1,13)}
@@ -53,11 +67,14 @@ def compute_monthly_averages(input_folder, hourly_features, monthly_features, ex
                 
             computed_df[hourly_column] = sorted_averages
 
+        # save the computed monthly averages as a csv file
+
         output_file_path = os.path.join(output_folder, f'computed_{file_name}')
         computed_df.to_csv(output_file_path, index=False, mode='w')
 
 
 def main():
+    # Load the required parameters
     params = yaml.safe_load(open("params.yaml"))["download"]
 
     input_folder = params['destination']
@@ -68,7 +85,6 @@ def main():
 
     os.makedirs(output_folder, exist_ok=True)
     
-
     compute_monthly_averages(
         input_folder,
         hourly_features,
