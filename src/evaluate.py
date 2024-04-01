@@ -7,18 +7,17 @@ from dvclive import Live
 import os
 import yaml
 
-def evaluate(input_folder, computed_folder, live, save_path):
+def evaluate(input_folder, live, save_path):
     files = os.listdir(input_folder)
-    computed_files = os.listdir(computed_folder)
 
-    # computed_files = [file_name for file_name in files if file_name.startswith('computed')]
+    computed_files = [file_name for file_name in files if file_name.startswith('computed')]
     gt_files = [file_name for file_name in files if file_name not in computed_files]
 
     r2_values= []
 
     for gt_file, computed_file in zip(gt_files, computed_files):
         gt_path = os.path.join(input_folder, gt_file)
-        computed_path = os.path.join(computed_folder, computed_file)
+        computed_path = os.path.join(input_folder, computed_file)
         gt_df = pd.read_csv(gt_path)
         computed_df = pd.read_csv(computed_path)
 
@@ -50,11 +49,10 @@ def evaluate(input_folder, computed_folder, live, save_path):
 
 def main():
     input_folder = 'data/output/'
-    computed_folder = 'data/computed/'
     EVAL_PATH = 'eval'
 
     with Live(EVAL_PATH, dvcyaml=False) as live:
-        evaluate(input_folder, computed_folder, live, save_path=EVAL_PATH)
+        evaluate(input_folder, live, save_path=EVAL_PATH)
 
 if __name__ == '__main__':
     main()

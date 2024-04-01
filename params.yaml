@@ -1,5 +1,5 @@
 download:
-  seed: 20240331
+  seed: 20240326
   year: 2023
   n_locs: 20
   base_url: https://www.ncei.noaa.gov/data/local-climatological-data/access/
@@ -17,3 +17,4 @@ download:
   - MonthlyDewpointTemperature
   - MonthlySeaLevelPressure
   - MonthlyStationPressure
+n_locs: 15
