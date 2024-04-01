@@ -76,13 +76,13 @@ stages:
       nfiles: 3
     - path: data/output/
       hash: md5
-      md5: fbef00aa10499b8114a4e7f16d65025c.dir
-      size: 3001
-      nfiles: 6
+      md5: c453dcfb8a5113e06276e4e6a26b9ea8.dir
+      size: 808
+      nfiles: 3
     - path: src/process.py
       hash: md5
-      md5: 2838e1c7bd611dac158a587e96aea7b0
-      size: 2559
+      md5: 01cf49f32c81a4b111978870077ec17c
+      size: 2681
     params:
       params.yaml:
         download.destination: data/archive/
@@ -98,3 +98,9 @@ stages:
         - MonthlyDewpointTemperature
         - MonthlySeaLevelPressure
         - MonthlyStationPressure
+    outs:
+    - path: data/computed/
+      hash: md5
+      md5: 495edec61e471ab7171bbc58eb79d45a.dir
+      size: 2193
+      nfiles: 3

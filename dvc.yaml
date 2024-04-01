@@ -35,10 +35,13 @@ stages:
     - download.hourly_features
     - download.monthly_features
     - download.destination
+    outs:
+    - data/computed/
   evaluation:
     cmd: python src/evaluate.py
     deps:
     - src/evaluate.py
     - data/output/
+    - data/computed/
     metrics:
     - eval/metrics.json
