@@ -1,5 +1,7 @@
 # BDL-A04
 
+The implementations of different stages of the pipeline are present inside the src directory.
+
 The problem involves setting up a pipeline to verify the
 consistency of a climatological dataset acquired from the
 National Centers for Environmental Information, spanning
